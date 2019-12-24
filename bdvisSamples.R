@@ -39,15 +39,15 @@ tempolarFiles <- new_FilePaths(c("daily.png", "weekly.png", "monthly.png",
 dir.create(dirname(tempolarFiles[1]))
 
 png(tempolarFiles[1])
-tempolar(dat, title = "Panthera Leo Records Temporal Distribution", color = "green", 
+tempolar(dat, title = "Daily Temporal Distribution of Records", color = "green", 
          plottype = "r", timescale = "d")
 dev.off()
 png(tempolarFiles[2])
-tempolar(dat, title = "Panthera Leo Records Temporal Distribution", color = "green", 
+tempolar(dat, title = "Weekly Temporal Distribution of Records", color = "green", 
          plottype = "r", timescale = "w")
 dev.off()
 png(tempolarFiles[3])
-tempolar(dat, title = "Panthera Leo Records Temporal Distribution", color = "green", 
+tempolar(dat, title = "Monthly Temporal Distribution of Records", color = "green", 
          plottype = "p", timescale = "m")
 dev.off()
 png(tempolarFiles[4])
@@ -73,7 +73,7 @@ png(otherFiles[2])
 distrigraph(dat, ptype = "cell", col = "firebrick", cumulative = T, type = "l")
 dev.off()
 png(otherFiles[3])
-mapgrid(dat, ptype = "records")
+mapgrid(dat, ptype = "records", title = "Density of Records on Panthera Leo")
 dev.off()
 
 # create and save completeness graph and map
@@ -85,5 +85,5 @@ png(completenessFiles[1])
 comp = bdcomplete(dat, recs = 5)
 dev.off()
 png(completenessFiles[2])
-mapgrid(comp, ptype = "complete")
+mapgrid(comp, title = "Completeness of Records on Panthera Leo", ptype = "complete")
 dev.off()
