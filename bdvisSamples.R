@@ -14,9 +14,11 @@ source("functionGetCountries.R")
 source("FilePaths.R")
 
 # read biodiversity data and output a summary
-dat <- occ_search(scientificName = "Panthera leo", limit = 10000, hasCoordinate = TRUE)
-dat <- format_bdvis(dat$data, "rgbif")
+#dat <- occ_search(scientificName = "Panthera leo", limit = 10000, hasCoordinate = TRUE)
+#dat <- format_bdvis(dat$data, "rgbif")
 bdsummary(dat) 
+
+africanCountries <- getCountriesByContinent("Africa") # for specifying region in mapgrid
 
 # create and save images specific to species
 speciesFiles <- new_FilePaths(c("density-map.png", "yearly-accumulation.png"), 
@@ -25,7 +27,7 @@ dir.create(dirname(speciesFiles[1]))
 
 png(speciesFiles[1])
 mapgrid(dat, title = "Distribution of Panthera Leo Sightings in Africa", ptype = "species", 
-        bbox = c(-40, 50, -40, 35), region = getCountriesByContinent("Africa"))
+        bbox = c(-40, 50, -40, 35), region = africanCountries)
 dev.off()
 png(speciesFiles[2])
 distrigraph(dat, ptype = "effortspecies", col = "firebrick", cumulative = T, type = "l")
@@ -73,7 +75,8 @@ png(otherFiles[2])
 distrigraph(dat, ptype = "cell", col = "firebrick", cumulative = T, type = "l")
 dev.off()
 png(otherFiles[3])
-mapgrid(dat, ptype = "records", title = "Density of Records on Panthera Leo")
+mapgrid(dat, ptype = "records", title = "Density of Records on Panthera Leo in Africa",
+        bbox = c(-40, 50, -40, 35), region = africanCountries)
 dev.off()
 
 # create and save completeness graph and map
@@ -85,5 +88,6 @@ png(completenessFiles[1])
 comp = bdcomplete(dat, recs = 5)
 dev.off()
 png(completenessFiles[2])
-mapgrid(comp, title = "Completeness of Records on Panthera Leo", ptype = "complete")
+mapgrid(comp, title = "Completeness of Records on Panthera Leo in Africa", ptype = "complete",
+        bbox = c(-40, 50, -40, 35), region = africanCountries)
 dev.off()
