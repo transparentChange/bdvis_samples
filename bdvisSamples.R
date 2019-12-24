@@ -14,8 +14,8 @@ source("functionGetCountries.R")
 source("FilePaths.R")
 
 # read biodiversity data and output a summary
-#dat <- occ_search(scientificName = "Panthera leo", limit = 10000, hasCoordinate = TRUE)
-#dat <- format_bdvis(dat$data, "rgbif")
+dat <- occ_search(scientificName = "Panthera leo", limit = 10000, hasCoordinate = TRUE)
+dat <- format_bdvis(dat$data, "rgbif")
 bdsummary(dat) 
 
 africanCountries <- getCountriesByContinent("Africa") # for specifying region in mapgrid
